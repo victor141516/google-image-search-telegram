@@ -13,7 +13,7 @@ if (len(sys.argv) > 1):
 else:
     # Production
     POLLING = False
-    WEBHOOK_URL = ""
+    WEBHOOK_URL = "https://google-image-search-telegram.herokuapp.com"
 
 BOT_NAME = "g_imagebot"
 CSE_KEY = "AIzaSyAgaWiuUSMyx2rpXNCM7cjqj70g4uJpHPg"
