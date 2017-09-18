@@ -19,6 +19,7 @@ BOT_NAME = "g_imagebot"
 CSE_KEY = "AIzaSyAgaWiuUSMyx2rpXNCM7cjqj70g4uJpHPg"
 CSE_CX = "017839625266631737468:49zyrnlnquw"
 API_TOKEN = "433849602:AAHYvB5-EzsWp7-tiOD9yBRY6jffZxxoGIw"
+BATCH = 10
 
 server = Flask(__name__)
 bot = telebot.TeleBot(API_TOKEN)
@@ -37,8 +38,14 @@ def google_search(search_term, api_key, cse_id, **kwargs):
 def default_query(inline_query):
     if (inline_query.query == ''):
         return
+
+    if inline_query.offset == '':
+        offset = 0
+    else:
+        offset = int(inline_query.offset)
+
     search_term = inline_query.query
-    search_results = google_search(search_term, CSE_KEY, CSE_CX, num=5)
+    search_results = google_search(search_term, CSE_KEY, CSE_CX, num=BATCH, start=(offset * BATCH) + 1)
 
     rs = []
     if not search_results:
@@ -52,7 +59,7 @@ def default_query(inline_query):
         except Exception as e:
             print(e)
     
-    bot.answer_inline_query(inline_query.id, rs, cache_time=2592000)
+    bot.answer_inline_query(inline_query.id, rs, cache_time=2592000, next_offset=offset + 1)
 
 
 @server.route("/bot", methods=['POST'])
