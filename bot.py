@@ -15,10 +15,10 @@ else:
     POLLING = False
     WEBHOOK_URL = ""
 
-BOT_NAME = "gimage_bot"
+BOT_NAME = "g_imagebot"
 CSE_KEY = "AIzaSyAgaWiuUSMyx2rpXNCM7cjqj70g4uJpHPg"
 CSE_CX = "017839625266631737468:49zyrnlnquw"
-API_TOKEN = "431130344:AAE2NT8-1Rqo1RXwaiyQ04tanWkkSVLSJAg"
+API_TOKEN = "433849602:AAHYvB5-EzsWp7-tiOD9yBRY6jffZxxoGIw"
 
 server = Flask(__name__)
 bot = telebot.TeleBot(API_TOKEN)
