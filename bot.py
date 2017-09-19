@@ -45,7 +45,7 @@ def default_query(inline_query):
         offset = int(inline_query.offset)
 
     search_term = inline_query.query
-    search_results = google_search(search_term, CSE_KEY, CSE_CX, num=BATCH, start=(offset * BATCH) + 1)
+    search_results = google_search(search_term, CSE_KEY, CSE_CX, safe="off", num=BATCH, start=(offset * BATCH) + 1)
 
     rs = []
     if not search_results:
