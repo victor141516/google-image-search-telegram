@@ -4,7 +4,7 @@
 This bot is just like @bing but using Google Images as backend
 
 # Install instructions
-##### First you need some Google search keys
+#### First you need some Google search keys
 
 1. Go to https://console.developers.google.com and make a new project.
 2. Go to `Library`, enable `Custom Search API` and make a new credential using the button you will be prompted
@@ -23,12 +23,12 @@ This bot is just like @bing but using Google Images as backend
 10. Delete the site you entered during the initial setup process.
 11. Copy your `Search engine ID` using the button for this purpose `[CSE_CX]`.
 
-##### Then your Telegram Bot API key
+#### Then your Telegram Bot API key
 1. Talk to @botfather using your Telegram account and he will give you your fresh new API key. `[API_TOKEN]`
 2. Copy your bot nickname `[BOT_NAME]`.
 3. This is that easy
 
-##### Deploy environment
+#### Deploy environment
 I deploy my Telegram bots using Heroku, so this part will be based on this service but you can use any other if you know how to deploy a webapp using Flask
 
 1. Make a new Heroku app and copy its URL `[WEBHOOK_URL]`
@@ -38,3 +38,7 @@ I deploy my Telegram bots using Heroku, so this part will be based on this servi
 5. Add them: `git add app.json Procfile Procfile.windows`
 5. Commit and push it: `git commit -am "This is a push" && git push heroku master`
 6. Done!
+
+#### Notes
+When you deploy on Heroku you must change `POLLING=True` to `POLLING=False` in `config.py`. `POLLING=True` is meant for development.
+You can change `BATCH=10` in `config.py`. This number means how much images the bot will send when someone ask for images and each time that someone pulls the image grid (on the Telegram app)

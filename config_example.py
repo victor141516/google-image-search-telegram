@@ -1,6 +1,7 @@
-BOT_NAME = "g_imagebot"
+BOT_NAME = ""
 CSE_KEY = ""
 CSE_CX = ""
 API_TOKEN = ""
-BATCH = 10
 WEBHOOK_URL = ""
+BATCH = 10
+POLLING = True

@@ -7,7 +7,6 @@ import telebot
 from telebot import types
 from config import *
 
-POLLING = True
 server = Flask(__name__)
 bot = telebot.TeleBot(API_TOKEN)
 
