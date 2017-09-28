@@ -5,22 +5,9 @@ from pprint import pprint
 import sys
 import telebot
 from telebot import types
+from config import *
 
-
-if (len(sys.argv) > 1):
-    # Debug
-    POLLING = True
-else:
-    # Production
-    POLLING = False
-    WEBHOOK_URL = "https://google-image-search-telegram.herokuapp.com"
-
-BOT_NAME = "g_imagebot"
-CSE_KEY = "AIzaSyAgaWiuUSMyx2rpXNCM7cjqj70g4uJpHPg"
-CSE_CX = "017839625266631737468:49zyrnlnquw"
-API_TOKEN = "433849602:AAHYvB5-EzsWp7-tiOD9yBRY6jffZxxoGIw"
-BATCH = 10
-
+POLLING = True
 server = Flask(__name__)
 bot = telebot.TeleBot(API_TOKEN)
 
