@@ -11,12 +11,14 @@ from config import *
 server = Flask(__name__)
 bot = telebot.TeleBot(API_TOKEN)
 
+global allowed_users
 try:
     the_file = open('allowed.json', 'r')
     allowed_users = json.loads(the_file.read())
     the_file.close()
 except:
     allowed_users = None
+
 
 def google_search(search_term, api_key, cse_id, **kwargs):
     service = build("customsearch", "v1", developerKey=api_key)
@@ -31,15 +33,18 @@ def google_search(search_term, api_key, cse_id, **kwargs):
         imgs.append((item['link'], item['image']['thumbnailLink']))
     return imgs
 
+
 @bot.message_handler(commands=['add'])
 def add_allowed_user(message):
-    global allowed_users
     new_users = message.text.split(" ")[1:]
     if (len(new_users) > 0 and allowed_users is not None and message.from_user.username not in allowed_users):
         return
     if (allowed_users is None):
+        global allowed_users
         allowed_users = []
-    allowed_users = new_users + allowed_users
+
+    global allowed_users
+    allowed_users = list(set(new_users + allowed_users))
     new_json = json.dumps(allowed_users)
     the_file = open('allowed.json', 'w')
     the_file.write(new_json)
@@ -96,4 +101,3 @@ if (len(sys.argv) == 2):
         bot.polling()
     else:
         server.run(host="0.0.0.0", port=os.environ.get('PORT', 9999))
-
