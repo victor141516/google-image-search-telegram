@@ -2,6 +2,6 @@
   "name": "Google Image search Telegram bot",
   "description": "Google Image search Telegram bot",
   "image": "heroku/python",
-  "repository": "https://git.heroku.com/google-image-search-telegram.git",
+  "repository": "",
   "keywords": ["python", "flask", "telegram", "google", "image" ]
 }
