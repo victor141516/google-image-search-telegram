@@ -11,13 +11,34 @@ from config import *
 server = Flask(__name__)
 bot = telebot.TeleBot(API_TOKEN)
 
-global allowed_users
+
+class AllowedUsers:
+    class __AllowedUsers:
+        def __init__(self, user_list):
+            self.user_list = user_list
+
+        def __str__(self):
+            return self.user_list
+
+    instance = None
+
+    def __init__(self, user_list=None):
+        if not AllowedUsers.instance:
+            AllowedUsers.instance = AllowedUsers.__AllowedUsers(user_list)
+        elif user_list is not None:
+            AllowedUsers.instance.user_list = user_list
+
+    def __getattr__(self, name):
+        return getattr(self.instance, name)
+
+
+allowed_users = None
 try:
     the_file = open('allowed.json', 'r')
-    allowed_users = json.loads(the_file.read())
+    allowed_users = AllowedUsers(json.loads(the_file.read())).user_list
     the_file.close()
 except:
-    allowed_users = None
+    pass
 
 
 def google_search(search_term, api_key, cse_id, **kwargs):
@@ -36,15 +57,14 @@ def google_search(search_term, api_key, cse_id, **kwargs):
 
 @bot.message_handler(commands=['add'])
 def add_allowed_user(message):
+    allowed_users = AllowedUsers().user_list
     new_users = message.text.split(" ")[1:]
     if (len(new_users) > 0 and allowed_users is not None and message.from_user.username not in allowed_users):
         return
     if (allowed_users is None):
-        global allowed_users
-        allowed_users = []
+        allowed_users = AllowedUsers([]).user_list
 
-    global allowed_users
-    allowed_users = list(set(new_users + allowed_users))
+    allowed_users = AllowedUsers(list(set(new_users + allowed_users))).user_list
     new_json = json.dumps(allowed_users)
     the_file = open('allowed.json', 'w')
     the_file.write(new_json)
@@ -54,6 +74,7 @@ def add_allowed_user(message):
 
 @bot.inline_handler(lambda query: True)
 def default_query(inline_query):
+    allowed_users = AllowedUsers().user_list
     if (inline_query.query == '' or (allowed_users is not None and inline_query.from_user.username not in allowed_users)):
         return
 
