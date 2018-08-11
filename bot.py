@@ -121,4 +121,4 @@ if (len(sys.argv) == 2):
         bot.remove_webhook()
         bot.polling()
     else:
-        server.run(host="0.0.0.0", port=os.environ.get('PORT', 9999))
+        server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 9999)))
