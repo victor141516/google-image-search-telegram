@@ -1,7 +1,0 @@
-{
-  "name": "Google Image search Telegram bot",
-  "description": "Google Image search Telegram bot",
-  "image": "heroku/python",
-  "repository": "",
-  "keywords": ["python", "flask", "telegram", "google", "image" ]
-}

@@ -1,1 +1,0 @@
-gunicorn -w4 -b :9999 bot:server
