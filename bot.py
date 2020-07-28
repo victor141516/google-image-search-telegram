@@ -90,6 +90,7 @@ def default_query(inline_query):
     if not search_results:
         rs.append(types.InlineQueryResultPhoto("1", "https://images-na.ssl-images-amazon.com/images/I/41q1QAln%2BQL._AC_UL320_SR248,320_.jpg", "https://images-na.ssl-images$amazon.com/images/I/41q1QAln%2BQL._AC_UL320_SR248,320_.jpg"))
     else:
+        print('Number of results ' + str(len(search_results)) + ' for term ' + search_term)
         try:
             id = 0
             for each in search_results:
@@ -98,8 +99,11 @@ def default_query(inline_query):
         except Exception as e:
             print(e)
 
-    bot.answer_inline_query(inline_query.id, rs, cache_time=2592000, next_offset=offset + 1)
-
+    try:
+        bot.answer_inline_query(inline_query.id, rs, cache_time=2592000, next_offset=offset + 1) @server.route("{subpath}/bot".format(subpath=NGINX_SUBPATH), methods=['POST']) def getMessage():
+    except Exception as e: bot.process_new_updates(
+        print(e) [telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+        print(rs)
 
 @server.route("{subpath}/bot".format(subpath=NGINX_SUBPATH), methods=['POST'])
 def getMessage():
